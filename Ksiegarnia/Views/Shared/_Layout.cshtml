@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿<!-- _Layout.cshtml -->
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +9,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Ksiegarnia.styles.css" asp-append-version="true" />
+
+    <style>
+        .navbar-nav .nav-link {
+            font-size: 18px; /* Dostosuj rozmiar tekstu według potrzeb */
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -19,7 +27,7 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Book" asp-action="Index">Lista Książek</a>
                         </li>
@@ -32,8 +40,8 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="BookManagement" asp-action="Index">Zarządzanie</a>
                         </li>
-                     
-                        
+
+
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>

@@ -75,29 +75,31 @@
     </style>
 </head>
 <body>
-    <h1>Book Management</h1>
+    <h1>Panel administratora</h1>
 
-    <a asp-action="Add" class="add-link">Add New Book</a>
+    <a asp-action="Add" class="add-link">Dodaj nową książkę</a>
 
     <table>
         <thead>
             <tr>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Price</th>
-                <th>Actions</th>
+                <th>Id</th>
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>Cena</th>
+                <th>Akcja</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var book in Model)
             {
                 <tr>
+                    <td>@book.BookId</td>
                     <td>@book.Title</td>
                     <td>@book.Author</td>
                     <td>@book.Price</td>
                     <td>
-                        <a href="@Url.Action("Edit", new { id = book.BookId })" class="edit-link">Edit</a> |
-                        <a href="@Url.Action("Delete", new { id = book.BookId })" class="delete-link">Delete</a>
+                        <a href="@Url.Action("Edit", new { id = book.BookId })" class="edit-link">Edytuj</a> |
+                        <a href="@Url.Action("Delete", new { id = book.BookId })" class="delete-link">Usuń</a>
                     </td>
                 </tr>
             }

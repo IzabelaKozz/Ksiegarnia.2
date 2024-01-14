@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Book>
+﻿@model IEnumerable<Ksiegarnia.Models.Book>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -18,6 +18,21 @@
             color: #333;
         }
 
+        .add-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #1e3799;
+            color: #fff;
+            padding: 15px 30px; /* Zwiększenie rozmiaru przycisku */
+            border-radius: 4px;
+        }
+
+            .add-link:hover {
+                background-color: #3c5aa6;
+            }
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -34,14 +49,6 @@
             color: white;
         }
 
-        img {
-            max-width: 120px; /* Zwiększenie rozmiaru zdjęcia */
-            max-height: 160px;
-            display: block;
-            margin: 0 auto; /* Wyśrodkowanie zdjęcia */
-            border-radius: 8px; /* Zaokrąglenie rogów */
-        }
-
         a {
             display: inline-block;
             padding: 8px 16px;
@@ -50,12 +57,17 @@
             border-radius: 4px;
         }
 
-        .details-link{
+        .details-link {
             background-color: #3498db;
             border: 1px solid #3498db;
             color: white;
         }
-            
+
+        .favorites-link {
+            background-color: #4caf50;
+            border: 1px solid #4caf50;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -64,11 +76,11 @@
     <table>
         <thead>
             <tr>
-                <th>   </th>
+                <th>Okładka</th>
                 <th>Tytuł</th>
                 <th>Autor</th>
                 <th>Cena</th>
-                <th>   </th>
+                <th>Akcje</th>
             </tr>
         </thead>
         <tbody>
@@ -85,6 +97,7 @@
                     <td>@book.Author</td>
                     <td>@book.Price</td>
                     <td>
+                        
                         <a href="@Url.Action("Details", new { id = book.BookId })" class="details-link">Szczegóły</a>
                     </td>
                 </tr>

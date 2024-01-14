@@ -1,42 +1,154 @@
 ﻿@model Book
 @using Ksiegarnia.Models
 
-<h2>Szczegóły Książki</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Szczegóły Książki</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0f0f0;
+        }
 
-@if (Model != null)
-{
-    <div>
-        <dl class="dl-horizontal">
-            <dt>Tytuł</dt>
-            <dd>@Model.Title</dd>
-            <dt>Autor</dt>
-            <dd>@Model.Author</dd>
-            <dt>Cena</dt>
-            <dd>@Model.Price</dd>
-        </dl>
+        .form-title {
+            text-align: center;
+            color: #333;
+        }
+
+        .edit-form-container {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .cover-image-container {
+            flex-shrink: 0;
+            margin-right: 20px;
+            width: 40%;
+        }
+
+        .cover-image {
+            max-width: 100%;
+            height: auto;
+            width: 100%;
+        }
+
+        .d-form {
+            flex-grow: 1;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        .form-textarea {
+            height: 300px; /* Zwiększono wysokość okna opisu */
+            resize: vertical;
+        }
+
+        .d-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #333;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .background-section {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Zwiększenie czcionki dla tytułu, autora, opisu, ceny i obrazu okładki */
+        .form-label,
+        .form-input,
+        .form-textarea {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="form-title">Szczegóły książki</h1>
+
+    <div class="edit-form-container">
+        <div class="cover-image-container">
+            <!-- Wyświetlanie obrazu okładki, jeśli jest dostępny -->
+            @if (!string.IsNullOrEmpty(Model.CoverImage))
+            {
+                <img src="~/images/@Model.CoverImage" alt="Okładka" class="cover-image" />
+            }
+        </div>
+
+        <div class="d-form">
+            <h2 class="form-title">@Model.Title</h2>
+
+            <div class="form-group">
+                <label class="form-label">Autor</label>
+                <div class="form-input">@Model.Author</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Cena</label>
+                <div class="form-input">@Model.Price</div>
+            </div>
+
+            <form asp-controller="Cart" asp-action="AddToCart" method="post" class="form-group">
+                <input type="hidden" name="bookId" value="@Model.BookId" />
+                <label class="form-label">Ilość:</label>
+                <input type="number" name="quantity" value="1" min="1" class="form-input" />
+                <button type="submit" class="d-button">Dodaj do koszyka</button>
+            </form>
+        </div>
     </div>
 
-    <form asp-controller="Cart" asp-action="AddToCart" method="post">
-        <input type="hidden" name="bookId" value="@Model.BookId" />
-        <label for="quantity">Ilość:</label>
-        <input type="number" name="quantity" value="1" min="1" />
-        <button type="submit">Dodaj do koszyka</button>
-    </form>
-
-    <div>
-        <dl class="dl-horizontal">
-            <dt>Opis książki</dt>
-            <dd>@Model.Description</dd>
-        </dl>
+    <div class="form-group background-section">
+        <label asp-for="Description" class="form-label">Opis</label>
+        <div class="form-textarea" id="descriptionText">@Model.Description</div>
     </div>
 
-}
-else
-{
-    <p>Brak danych do wyświetlenia.</p>
-}
-
-<p>
-    <a asp-controller="Book" asp-action="Index" >Powrót do listy książek</a>
-</p>
-
+    <div class="d-flex justify-content-center">
+        <a asp-controller="Book" asp-action="Index" class="back-link">Powrót do listy książek</a>
+    </div>
+</body>
+</html>

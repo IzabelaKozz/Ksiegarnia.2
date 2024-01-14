@@ -5,6 +5,7 @@
     ViewData["Title"] = "Logowanie";
     Layout = "/Areas/Identity/Pages/_Layout.cshtml";
 }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,37 +40,37 @@
 
         .col-md-4 {
             width: 100%; /* Zwiększ szerokość pola */
-            weight: 60px;
         }
 
         .col-md-6 {
             width: 55%;
         }
 
-        section {
-            padding: 20px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-floating {
-            margin-bottom: 20px;
-        }
-
         .form-control {
             width: 100%;
             height: 50px;
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid #ddd; /* To jest styl ramki dla pól formularza */
             border-radius: 4px;
         }
 
-        .checkbox {
-            margin-bottom: 20px;
+        section {
+            padding: 20px;
+            background-color: transparent; /* Zmiana tła na przeźroczyste */
+            border-radius: 0; /* Usunięcie zaokrągleń narożników */
+            box-shadow: none; /* Usunięcie efektu cienia */
         }
 
+        }
+
+        .form-floating {
+            margin-bottom: 40px;
+        }
+        /* Margines pomiędzy polem Email a polem Hasło */
+        #Input_Password {
+            margin-top: 10px;
+        }
+      
         .btn-primary {
             background-color: #3498db;
             color: #fff;
@@ -95,7 +96,6 @@
         <div class="col-md-4">
             <section>
                 <form id="account" method="post">
-                   
                     <hr />
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-floating">
@@ -108,14 +108,12 @@
                         <label asp-for="Input.Password" class="form-label">Hasło</label>
                         <span asp-validation-for="Input.Password" class="text-danger"></span>
                     </div>
-                    <div>
-                        <div class="checkbox">
-                            <label asp-for="Input.RememberMe" class="form-label">
-                                <input class="form-check-input" asp-for="Input.RememberMe" />
-                                @Html.DisplayNameFor(m => m.Input.RememberMe)
-                                Zapamiętaj mnie
-                            </label>
-                        </div>
+                    <div class="checkbox">
+                        <label asp-for="Input.RememberMe" class="form-label">
+                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                            Zapamiętaj mnie
+                        </label>
                     </div>
                     <div>
                         <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Zaloguj</button>

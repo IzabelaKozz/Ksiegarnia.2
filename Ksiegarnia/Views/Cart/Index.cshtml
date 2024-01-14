@@ -1,50 +1,138 @@
 ﻿@model Cart
 
-<h2>Twój Koszyk</h2>
-
-@if (TempData["ErrorMessage"] != null)
-{
-    <div class="alert alert-danger">
-        @TempData["ErrorMessage"]
-    </div>
-}
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Tytuł</th>
-            <th>Ilość</th>
-            <th>Cena</th>
-            <th>Łączna Cena</th>
-            <th>Operacje</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Items)
-        {
-            <tr>
-                <td>@item.Title</td>
-                <td>
-                    <form asp-controller="Cart" asp-action="UpdateQuantity" method="post">
-                        <input type="hidden" name="bookId" value="@item.BookId" />
-                        <input type="number" name="quantity" value="@item.Quantity" />
-                        <button type="submit">Zaktualizuj</button>
-                    </form>
-                </td>
-                <td>@item.Price</td>
-                <td>@(item.Quantity * item.Price)</td>
-                <td>
-                    <a asp-action="RemoveFromCart" asp-controller="Cart" asp-route-bookId="@item.BookId">Usuń</a>
-                </td>
-            </tr>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twój Koszyk</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0f0f0;
+            margin: 0; /* Dodano margines 0 dla body */
         }
-    </tbody>
-</table>
 
-<div>
-    <strong>Łączna suma: @Model.GetTotal()</strong>
-</div>
+        h1 {
+            text-align: center;
+            color: #333;
+        }
 
-<p>
-    <a asp-controller="Book" asp-action="Index">Kontynuuj zakupy</a>
-</p>
+        .alert {
+            background-color: #e74c3c;
+            color: white;
+            padding: 15px;
+            border-radius: 4px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd; /* Dodano dolną krawędź dla każdego wiersza */
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        input[type="number"] {
+            width: 60px; /* Zmieniono szerokość pola liczbowego */
+        }
+
+        .update-button {
+            background-color: #3498db;
+            ;
+            color: #fff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .update-button:hover {
+                background-color: #3c5aa6;
+            }
+
+        .remove-link {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #e74c3c;
+            border: 1px solid #e74c3c;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+            .remove-link:hover {
+                background-color: #c0392b;
+                border: 1px solid #c0392b;
+            }
+
+        .total-section {
+            margin-top: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>Twój Koszyk</h1>
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <table>
+        <thead>
+            <tr>
+                <th>Tytuł</th>
+                <th>Ilość</th>
+                <th>Cena</th>
+                <th>Łączna Cena</th>
+                <th>Operacje</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>
+                        <form asp-controller="Cart" asp-action="UpdateQuantity" method="post">
+                            <input type="hidden" name="bookId" value="@item.BookId" />
+                            <input type="number" name="quantity" value="@item.Quantity" />
+                            <button type="submit" class="update-button">Zaktualizuj</button>
+                        </form>
+                    </td>
+                    <td>@item.Price</td>
+                    <td>@(item.Quantity * item.Price)</td>
+                    <td>
+                        <a asp-action="RemoveFromCart" asp-controller="Cart" asp-route-bookId="@item.BookId" class="remove-link">Usuń</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="total-section">
+        <strong>Łączna suma: @Model.GetTotal()</strong>
+    </div>
+
+    <p>
+        <a asp-controller="Book" asp-action="Index" class="add-link">Kontynuuj zakupy</a>
+    </p>
+</body>
+</html>

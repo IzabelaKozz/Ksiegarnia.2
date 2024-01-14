@@ -100,24 +100,27 @@
 <body>
     <div class="contact-container">
         <div class="contact-info">
-            <h2>Księgarnia internetowa <span style="color: #3498db;">Bookshop</span></h2>
+            <h2>Księgarnia internetowa </h2>
             <h3>Skontaktuj się z nami</h3>
             <p>
-                <strong style=";">Adres korespondencyjny:</strong><br />
-                ul.  Poznań
+                <strong style="color: #3498db;">Adres korespondencyjny:</strong><br />
+                Aleje Solidarnośći 17, 60-650 Poznań
             </p>
             <p>
                 <strong style="color: #3498db;">Email:</strong><br />
-                bookshopcontact@gmail.com
+                ksiegarnia.im@gmail.com
             </p>
             <p>
                 <strong style="color: #3498db;">Telefon:</strong><br />
-                000 000 000
+               639 528 417
             </p>
+            <div class="text-center">
+                <img src="~/images/mail.gif" alt="Księgarnia" style="width:100%; max-height: 50x; object-fit: cover;">
+            </div>
         </div>
 
         <div class="contact-form">
-            <h2>Formularz <span style="color: #3498db;">Kontaktowy</span></h2>
+            <h2>Formularz Kontaktowy</h2>
             <form method="post">
                 <div class="form-group">
                     <label for="fullName">Imię i Nazwisko:</label>
@@ -143,6 +146,8 @@
             </form>
         </div>
     </div>
-    <a asp-action="Index" class="back-link">Powrót do Listy</a>
+    <div class="d-flex justify-content-center">
+        <a asp-controller="Home" asp-action="Index"class="back-link"> Powrót do strony głównej</a>
+    </div>
 </body>
 </html>

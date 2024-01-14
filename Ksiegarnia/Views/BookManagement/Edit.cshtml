@@ -18,9 +18,27 @@
             color: #333;
         }
 
-        .edit-form {
-            max-width: 800px;
+        .edit-form-container {
+            display: flex;
+            max-width: 1200px;
             margin: 0 auto;
+            margin-top: 20px;
+        }
+
+        .cover-image-container {
+            flex-shrink: 0;
+            margin-right: 20px;
+            width: 40%;
+        }
+
+        .cover-image {
+            max-width: 100%;
+            height: auto;
+            width: 100%;
+        }
+
+        .edit-form {
+            flex-grow: 1;
             padding: 20px;
             background-color: #f9f9f9;
             border: 1px solid #ddd;
@@ -89,39 +107,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 class="form-title">Edit Book</h1>
+    <h1 class="form-title">Edytuj książkę</h1>
 
-    <form asp-action="Edit" method="post" class="edit-form" enctype="multipart/form-data">
-        <input type="hidden" asp-for="BookId" />
-
-        <div class="form-group">
-            <label asp-for="Title" class="form-label">Title</label>
-            <input asp-for="Title" class="form-input" />
+    <div class="edit-form-container">
+        <div class="cover-image-container">
+            <!-- Wyświetlanie obrazu okładki, jeśli jest dostępny -->
+            @if (!string.IsNullOrEmpty(Model.CoverImage))
+            {
+                <img src="~/images/@Model.CoverImage" alt="Okładka" class="cover-image" />
+            }
         </div>
 
-        <div class="form-group">
-            <label asp-for="Author" class="form-label">Author</label>
-            <input asp-for="Author" class="form-input" />
+        <div class="edit-form">
+            <form asp-action="Edit" method="post" enctype="multipart/form-data">
+                <input type="hidden" asp-for="BookId" />
+
+                <div class="form-group">
+                    <label asp-for="Title" class="form-label">Tytuł</label>
+                    <input asp-for="Title" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Author" class="form-label">Autor</label>
+                    <input asp-for="Author" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Description" class="form-label">Opis</label>
+                    <textarea asp-for="Description" class="form-textarea"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Price" class="form-label">Cena</label>
+                    <input asp-for="Price" class="form-input" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="CoverImage" class="form-label">Okładka</label>
+                    <input asp-for="CoverImage" class="form-input" type="file" accept="image/*" />
+                </div>
+
+                <button type="submit" class="form-button">Zapisz zmiany</button>
+            </form>
         </div>
+    </div>
 
-        <div class="form-group">
-            <label asp-for="Description" class="form-label">Description</label>
-            <textarea asp-for="Description" class="form-textarea"></textarea>
-        </div>
-
-        <div class="form-group">
-            <label asp-for="Price" class="form-label">Price</label>
-            <input asp-for="Price" class="form-input" />
-        </div>
-
-        <div class="form-group">
-            <label asp-for="CoverImage" class="form-label">Cover Image</label>
-            <input asp-for="CoverImage" class="form-input" type="file" accept="image/*" />
-        </div>
-
-        <button type="submit" class="form-button">Update Book</button>
-    </form>
-
-    <a asp-action="Index" class="back-link">Back to List</a>
+    <div class="d-flex justify-content-center">
+        <a asp-controller="BookManagement" asp-action="Index" class="back-link"> Powrót do strony głównej</a>
+    </div>
 </body>
 </html>
