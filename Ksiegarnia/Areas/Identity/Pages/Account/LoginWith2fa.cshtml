@@ -1,0 +1,133 @@
+﻿@page
+@model LoginWith2faModel
+@{
+    ViewData["Title"] = "Autoryzacja dwuetapowa";
+    Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        hr {
+            border: 1px solid #3498db;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .col-md-4 {
+            width: 100%;
+        }
+
+        section {
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-floating {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            height: 50px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .checkbox {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            .btn-primary:hover {
+                background-color: #2184b7;
+            }
+
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+            a:hover {
+                color: #2184b7;
+            }
+    </style>
+</head>
+<body>
+    <h1>@ViewData["Title"]</h1>
+    <hr />
+    <p>Your login is protected with an authenticator app. Enter your authenticator code below.</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <section>
+                <form method="post" asp-route-returnUrl="@Model.ReturnUrl">
+                    <input asp-for="RememberMe" type="hidden" />
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-floating">
+                        <input asp-for="Input.TwoFactorCode" class="form-control" autocomplete="off" />
+                        <label asp-for="Input.TwoFactorCode" class="form-label"></label>
+                        <span asp-validation-for="Input.TwoFactorCode" class="text-danger"></span>
+                    </div>
+                    <div>
+                        <div class="checkbox">
+                            <label asp-for="Input.RememberMachine" class="form-label">
+                                <input asp-for="Input.RememberMachine" />
+                                @Html.DisplayNameFor(m => m.Input.RememberMachine)
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <p>
+        Don't have access to your authenticator device? You can
+        <a id="recovery-code-login" asp-page="./LoginWithRecoveryCode" asp-route-returnUrl="@Model.ReturnUrl">log in with a recovery code</a>.
+    </p>
+
+    <script>
+        // Add your scripts here
+    </script>
+</body>
+</html>

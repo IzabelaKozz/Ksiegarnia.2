@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Book>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Książek</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        img {
+            max-width: 120px; /* Zwiększenie rozmiaru zdjęcia */
+            max-height: 160px;
+            display: block;
+            margin: 0 auto; /* Wyśrodkowanie zdjęcia */
+            border-radius: 8px; /* Zaokrąglenie rogów */
+        }
+
+        a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 4px;
+        }
+
+        .details-link{
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            color: white;
+        }
+            
+    </style>
+</head>
+<body>
+    <h1>LISTA KSIĄŻEK</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>   </th>
+                <th>Tytuł</th>
+                <th>Autor</th>
+                <th>Cena</th>
+                <th>   </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>
+                        @if (!string.IsNullOrEmpty(book.CoverImage))
+                        {
+                            <img src="~/images/@book.CoverImage" alt="Cover Image" />
+                        }
+                    </td>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Price</td>
+                    <td>
+                        <a href="@Url.Action("Details", new { id = book.BookId })" class="details-link">Szczegóły</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

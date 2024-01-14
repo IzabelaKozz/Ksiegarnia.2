@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Witaj w naszej księgarni";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .display-4 {
+            margin-top: 50px;
+            color: #333;
+        }
+
+        img {
+            width: 100%;
+            height: 68vh;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="display-4">Witaj w naszej księgarni</h1>
+        <img src="~/images/yt.gif" alt="ksiegarnia">
+    </div>
+</body>
+</html>

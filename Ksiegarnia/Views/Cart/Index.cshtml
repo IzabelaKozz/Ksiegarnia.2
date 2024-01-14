@@ -1,0 +1,50 @@
+﻿@model Cart
+
+<h2>Twój Koszyk</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Ilość</th>
+            <th>Cena</th>
+            <th>Łączna Cena</th>
+            <th>Operacje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td>@item.Title</td>
+                <td>
+                    <form asp-controller="Cart" asp-action="UpdateQuantity" method="post">
+                        <input type="hidden" name="bookId" value="@item.BookId" />
+                        <input type="number" name="quantity" value="@item.Quantity" />
+                        <button type="submit">Zaktualizuj</button>
+                    </form>
+                </td>
+                <td>@item.Price</td>
+                <td>@(item.Quantity * item.Price)</td>
+                <td>
+                    <a asp-action="RemoveFromCart" asp-controller="Cart" asp-route-bookId="@item.BookId">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <strong>Łączna suma: @Model.GetTotal()</strong>
+</div>
+
+<p>
+    <a asp-controller="Book" asp-action="Index">Kontynuuj zakupy</a>
+</p>

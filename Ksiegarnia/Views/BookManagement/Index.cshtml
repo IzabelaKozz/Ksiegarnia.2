@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Ksiegarnia.Models.Book>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Management</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .add-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #1e3799;
+            color: #fff;
+            padding: 15px 30px; /* Zwiększenie rozmiaru przycisku */
+            border-radius: 4px;
+        }
+
+            .add-link:hover {
+                background-color: #3c5aa6;
+            }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        a {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            color: #333;
+            border-radius: 4px;
+        }
+
+            a:hover {
+                background-color: #ddd;
+            }
+
+        .edit-link,
+        .delete-link {
+            background-color: #3498db;
+            border: 1px solid #3498db;
+            color: white;
+        }
+
+            .edit-link:hover,
+            .delete-link:hover {
+                background-color: #2184b7;
+            }
+    </style>
+</head>
+<body>
+    <h1>Book Management</h1>
+
+    <a asp-action="Add" class="add-link">Add New Book</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var book in Model)
+            {
+                <tr>
+                    <td>@book.Title</td>
+                    <td>@book.Author</td>
+                    <td>@book.Price</td>
+                    <td>
+                        <a href="@Url.Action("Edit", new { id = book.BookId })" class="edit-link">Edit</a> |
+                        <a href="@Url.Action("Delete", new { id = book.BookId })" class="delete-link">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

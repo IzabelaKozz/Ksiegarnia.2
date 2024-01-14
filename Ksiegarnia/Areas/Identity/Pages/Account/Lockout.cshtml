@@ -1,0 +1,39 @@
+﻿@page
+@model LockoutModel
+@{
+    ViewData["Title"] = "Konto zablokowane";
+    Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #d9534f;
+        }
+
+        p {
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>@ViewData["Title"]</h1>
+        <p>This account has been locked out, please try again later.</p>
+    </header>
+</body>
+</html>

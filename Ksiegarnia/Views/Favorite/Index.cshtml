@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Book>
+
+<h2>Ulubione Książki</h2>
+
+<ul>
+    @foreach (var book in Model)
+    {
+        <li>@book.Title</li>
+    }
+</ul>
+
+<p>
+    <a asp-action="Index">Powrót do ulubionych książek</a>
+</p>

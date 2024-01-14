@@ -1,0 +1,66 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Potwierdzenie rejestracji";
+    Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 40px; /* Zwiększenie odstępu od następnego elementu */
+            text-align: center;
+            color: #333;
+        }
+
+        a {
+            color: #3498db;
+            font-size: 20px; /* Zwiększenie rozmiaru tekstu */
+            margin-top: 10px; /* Przesunięcie linku niżej */
+            display: inline-block; /* Zapewnienie, że link jest jednym blokiem */
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+    <h1>@ViewData["Title"]</h1>
+
+    @if (Model.DisplayConfirmAccountLink)
+    {
+        <p>
+             <a id="confirm-link" href="@Model.EmailConfirmationUrl">Kliknij tutaj, aby potwierdzić swoje konto</a>
+        </p>
+    }
+    else
+    {
+        <p>
+            Proszę sprawdzić swoją skrzynkę e-mail, aby potwierdzić konto.
+        </p>
+    }
+
+    <script>
+        // Add your scripts here
+    </script>
+</body>
+</html>
